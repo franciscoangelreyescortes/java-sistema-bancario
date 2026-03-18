@@ -22,17 +22,19 @@ public class CuentaBancaria {
     }
 
     // Método para retirar
-    public void retirar(double cantidad) {
-        if (cantidad > 0 && cantidad <= saldo) {
-            saldo -= cantidad;
-            System.out.println("Retiro exitoso de: $" + cantidad);
-        } else {
-            System.out.println("Fondos insuficientes o cantidad inválida.");
+    public void retirar(double cantidad) throws Exception {
+        if (cantidad > saldo) {
+            throw new Exception("Saldo insuficiente. Intento de retiro: $" + cantidad);
         }
+        if (cantidad <= 0) {
+            throw new Exception("La cantidad debe ser mayor a cero.");
+        }
+        saldo -= cantidad;
+        System.out.println("Retiro de $" + cantidad + " exitoso.");
     }
 
-    // Getter para el saldo (Solo lectura)
     public double getSaldo() {
         return saldo;
     }
+
 }
